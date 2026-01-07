@@ -1,15 +1,55 @@
-// Step 1: Simulate User Behavior
-// - Add event listeners for button clicks and form submissions.
-// - Use JavaScript to dynamically update the DOM based on user actions.
+// index.js
 
-// Step 2: DOM Manipulation Functions
-// - Implement functions to add, update, and remove DOM elements.
-// - Ensure all elements are dynamically created with appropriate attributes and content.
+// Add a new element to the DOM
+function addElementToDOM(targetId, text) {
+  const target = document.getElementById(targetId)
+  if (!target) return
+  const p = document.createElement('p')
+  p.textContent = text
+  target.appendChild(p)
+}
 
-// Step 3: Error Handling
-// - Display error messages in the DOM for invalid inputs or missing elements.
-// - Create reusable functions to handle common error cases.
+// Remove an element from the DOM by ID
+function removeElementFromDOM(elementId) {
+  const element = document.getElementById(elementId)
+  if (!element) return
+  element.remove()
+}
 
-// Step 4: Reusable Utilities
-// - Create modular utility functions, such as createElement(tag, attributes).
-// - Ensure all functions follow DRY principles for maintainability.
+// Simulate a button click by adding text to a target element
+function simulateClick(targetId, text) {
+  addElementToDOM(targetId, text)
+}
+
+// Handle form submission, validate input, and update DOM
+function handleFormSubmit(formId, targetId) {
+  const form = document.getElementById(formId)
+  if (!form) return
+
+  const input = form.querySelector('input')
+  const target = document.getElementById(targetId)
+  const errorMessage = document.getElementById('error-message')
+
+  if (!input.value.trim()) {
+    if (errorMessage) {
+      errorMessage.textContent = 'Input cannot be empty'
+      errorMessage.classList.remove('hidden')
+    }
+    return
+  }
+
+  addElementToDOM(targetId, input.value)
+  input.value = ''
+
+  if (errorMessage) {
+    errorMessage.textContent = ''
+    errorMessage.classList.add('hidden')
+  }
+}
+
+module.exports = {
+  addElementToDOM,
+  removeElementFromDOM,
+  simulateClick,
+  handleFormSubmit,
+}

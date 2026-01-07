@@ -7,7 +7,7 @@ const {
   removeElementFromDOM,
   simulateClick,
   handleFormSubmit,
-} = require('../index')
+} = require('../index') // Correct path from test folder
 
 describe('DOM Testing and User Behavior Simulation', () => {
   beforeEach(() => {
